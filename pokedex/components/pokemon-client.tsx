@@ -6,6 +6,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { comparators } from "@/lib/sort";
 import { getPokemon } from "@/lib/pokeapi";
 import { padId } from "@/lib/utils";
+import { PokemonGrid } from "./pokemon-grid";
 
 interface Props {
     index: PokemonSummary[];
@@ -105,19 +106,7 @@ export function PokemonClient({ index, typeIndex }: Props) {
 
             <p>{filtered.length} results</p>
 
-            <ul>
-                {visible.map((p) => (
-                    <li key={p.id}>
-                        #{padId(p.id)} {p.name}
-                        {details.get(p.id) && (
-                            <span>
-                                {" — "}
-                                {details.get(p.id)!.types.map((t) => t.type.name).join(", ")}
-                            </span>
-                        )}
-                    </li>
-                ))}
-            </ul>
+            <PokemonGrid index={visible} details={details} />
 
             {visibleCount < filtered.length && (
                 <button onClick={() => setVisibleCount((v) => v + 10)}>
