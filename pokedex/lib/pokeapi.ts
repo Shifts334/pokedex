@@ -1,4 +1,4 @@
-import { PokemonDTO, PokemonSpeciesDTO, Pokemon } from "@/types/pokemon";
+import { PokemonDTO, PokemonSpeciesDTO, Pokemon, PokemonSummary } from "@/types/pokemon";
 import { describe } from "node:test";
 
 function toPokemon (
@@ -28,4 +28,16 @@ function toPokemon (
     }
 }
 
+export async function getPokemonIndex(): Promise<PokemonSummary[]> {
+    const data = await fetchJson<PokemonListResponse>(
+        '${BASE}/pokemon/?limit=${MAX_POKEMON_ID}'
+    );
+
+    return data.results.map((r,i)=>({
+        id: i+1,
+        name:r.name,
+    }));
+}
+
+const id = Number(r.url.split("/").filter(Boolean).pop());
 
