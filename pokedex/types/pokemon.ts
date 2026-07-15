@@ -62,7 +62,6 @@ export interface Pokemon{
     category:string;
     description:string;
     stats: {name: string; value: number}[];
-    abilities: string[]
     artworkUrl:string;
     spriteFallback: string | null;
     weaknesses:string[];
@@ -70,3 +69,4 @@ export interface Pokemon{
 
 //export keys for ui
 export type SortKey = "id-asc" | "id-desc" | "name-asc" | "name-desc"
+
