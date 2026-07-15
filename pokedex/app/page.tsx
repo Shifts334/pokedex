@@ -1,16 +1,13 @@
-import { getPokemon, getPokemonSpecies, toPokemon } from "@/lib/pokeapi";
-import { getWeaknesses } from "@/lib/weakness";
+import { getPokemonIndex, getTypeIndex, serializeTypeIndex } from "@/lib/pokeapi";
+import { PokemonClient } from "@/components/pokemon-client";
 
-//testing sum tings
 
 export default async function Home() {
-  const [dto, species] = await Promise.all([
-    getPokemon(1011),
-    getPokemonSpecies(1011),
+  const [index, typeIndex] = await Promise.all([
+    getPokemonIndex(),
+    getTypeIndex(),
   ]);
-const weaknesses = await getWeaknesses(dto.types.map((t)=>t.type.name));
-const p = toPokemon(dto, species, weaknesses);
-console.log(p);
-return <div>check terminal</div>
+  
+  return(<PokemonClient index={index} typeIndex={serializeTypeIndex(typeIndex)} />);
 }
 
