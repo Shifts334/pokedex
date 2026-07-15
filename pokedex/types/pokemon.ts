@@ -4,6 +4,7 @@ export interface NamedAPIResource {
     url: string;
 }
 
+// api responses
 //DTO - Data Transfer Objects
 
 // need count first so ill call the api
@@ -66,3 +67,6 @@ export interface Pokemon{
     spriteFallback: string | null;
     weaknesses:string[];
 }
+
+//export keys for ui
+export type SortKey = "id-asc" | "id-desc" | "name-asc" | "name-desc"
