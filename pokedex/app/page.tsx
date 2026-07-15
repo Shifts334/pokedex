@@ -5,8 +5,8 @@ import { getWeaknesses } from "@/lib/weakness";
 
 export default async function Home() {
   const [dto, species] = await Promise.all([
-    getPokemon(25),
-    getPokemonSpecies(25),
+    getPokemon(26),
+    getPokemonSpecies(26),
   ]);
 const weaknesses = await getWeaknesses(dto.types.map((t)=>t.type.name));
 const p = toPokemon(dto, species, weaknesses);
