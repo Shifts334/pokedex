@@ -6,8 +6,8 @@ const BASE = "https://pokeapi.co/api/v2";
 
 
 // fetch wrapper
-async function fetchJson<T>(url: string): Promise<T> {
-    const res = await fetch(url, {next: {revalidate: false} });
+async function fetchJson<T>(url: string, opts?: { signal?: AbortSignal }): Promise<T> {
+    const res = await fetch(url, {next: {revalidate: false}, signal: opts?.signal });
     if (!res.ok) throw new Error(`PokeAPI ${res.status} for ${url}`);
     return res.json() as Promise<T>
 }
@@ -24,8 +24,8 @@ export async function getPokemonIndex(): Promise<PokemonSummary[]> {
     }));
 }
 
-export async function getPokemon(id: number): Promise<PokemonDTO> {
-    return fetchJson<PokemonDTO>(`${BASE_URL}/pokemon/${id}/`);
+export async function getPokemon(id: number, opts?: { signal?: AbortSignal }): Promise<PokemonDTO> {
+    return fetchJson<PokemonDTO>(`${BASE_URL}/pokemon/${id}/`, opts);
 }
 
 export async function getPokemonSpecies(id:number): Promise<PokemonSpeciesDTO> {
