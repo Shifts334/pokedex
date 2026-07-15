@@ -64,6 +64,31 @@ export function toPokemon (
 }
 
 
-//export async function getTypeIndex()
-// build it in a bit
+export async function getTypeIndex(): Promise<Map<string, Set<number>>> {
+    const typeList = await fetchJson<{ results: { name: string }[] }>(`${BASE_URL}/type/`);
 
+    const realTypes = typeList.results.filter((t)=> t.name !== "unknown" && t.name !== "shadow");
+    
+    const entries = await Promise.all(
+        realTypes.map(async (t)=>{
+            const data = await getType(t.name);
+            const ids = new Set(
+                data.pokemon.map((p) => Number(p.pokemon.url.split("/").filter(Boolean).pop()))
+                .filter((id)=>id <= MAX_POKEMON_ID)
+            );
+            return [t.name, ids] as const;
+            })
+    );
+
+    return new Map(entries);
+}
+
+export function serializeTypeIndex(
+    index: Map<string, Set<number>>): 
+    Record<string, number[]> {
+        const out: Record<string, number[]> = {};
+        for (const [type, ids] of index) {
+            out[type] = [...ids];
+        }
+        return out;
+    }
