@@ -73,7 +73,18 @@ export default async function Page({params,}: {params:Promise<{id:string}>}){
                 ))}
             </section>
 
-            
+            <nav>
+                {pokemon.id > 1 ? (<Link href={`/pokemon/${pokemon.id - 1}`}>Previous</Link>): 
+                (
+                <span aria-disabled="true">Previous</span>
+                )}
+
+                {pokemon.id < MAX_POKEMON_ID ? (
+                    <Link href={`/pokemon/${pokemon.id + 1}`}>Next</Link>
+                ) : (
+                    <span aria-disabled="true">Next</span>
+                )}
+            </nav>
 
         </main>
     )
