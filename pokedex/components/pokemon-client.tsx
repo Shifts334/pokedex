@@ -88,30 +88,43 @@ export function PokemonClient({ index, typeIndex }: Props) {
 
     
     return (
-        <main>
-            <input
-                value={query}
-                onChange={(e) => handleSearch(e.target.value)}
-                placeholder="Search by name or ID"
-            />
-            <select
-                value={sort}
-                onChange={(e) => handleSort(e.target.value as SortKey)}
-            >
-                <option value="id-asc">ID asc</option>
-                <option value="id-desc">ID desc</option>
-                <option value="name-asc">Name A-Z</option>
-                <option value="name-desc">Name Z-A</option>
-            </select>
+        <main className="mx-auto w-full max-w-5xl px-4 py-8">
+            <h1 className="text-2xl font-semibold tracking-tight">Pokedex</h1>
 
-            <p>{filtered.length} results</p>
+            <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                <input
+                    value={query}
+                    onChange={(e) => handleSearch(e.target.value)}
+                    placeholder="Search by name or ID"
+                    className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none placeholder:text-muted focus:border-foreground/30 sm:max-w-xs"
+                />
+                <select
+                    value={sort}
+                    onChange={(e) => handleSort(e.target.value as SortKey)}
+                    className="rounded-lg border border-border bg-card px-3 py-2 text-sm"
+                >
+                    <option value="id-asc">ID asc</option>
+                    <option value="id-desc">ID desc</option>
+                    <option value="name-asc">Name A-Z</option>
+                    <option value="name-desc">Name Z-A</option>
+                </select>
+            </div>
 
-            <PokemonGrid index={visible} details={details} />
+            <p className="mt-3 text-sm text-muted">{filtered.length} results</p>
+
+            <div className="mt-6">
+                <PokemonGrid index={visible} details={details} />
+            </div>
 
             {visibleCount < filtered.length && (
-                <button onClick={() => setVisibleCount((v) => v + 10)}>
-                    Load More
-                </button>
+                <div className="mt-8 flex justify-center">
+                    <button
+                        onClick={() => setVisibleCount((v) => v + 10)}
+                        className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium transition hover:border-foreground/30"
+                    >
+                        Load More
+                    </button>
+                </div>
             )}
         </main>
     );

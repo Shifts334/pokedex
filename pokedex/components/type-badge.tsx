@@ -1,4 +1,4 @@
-// 18 real types, colours so the grid doesn't look like a wireframe
+// colors for the badges/type
 const TYPE_COLORS: Record<string, string> = {
     normal: "#A8A77A",
     fire: "#EE8130",
