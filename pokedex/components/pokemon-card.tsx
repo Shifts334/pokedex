@@ -26,7 +26,7 @@ export function PokemonCard({ summary, detail }: Props) {
     return (
         <Link
             href={`/pokemon/${summary.id}`}
-            className="flex flex-col items-center gap-1 rounded border p-4"
+            className="flex flex-col items-center gap-1 rounded-lg border border-border bg-card p-4 transition hover:-translate-y-0.5 hover:shadow-md"
         >
             <Image
                 src={src}
@@ -35,8 +35,8 @@ export function PokemonCard({ summary, detail }: Props) {
                 height={120}
                 onError={() => setFailed(true)}
             />
-            <span className="text-sm opacity-60">#{padId(summary.id)}</span>
-            <span className="capitalize">{summary.name}</span>
+            <span className="text-sm text-muted">#{padId(summary.id)}</span>
+            <span className="font-medium capitalize">{summary.name}</span>
 
             <div className="flex h-6 gap-1">
                 {detail?.types.map((t) => (
