@@ -12,7 +12,7 @@ A browsable Pokedex for the first 1010 Pokemon, built with Next.js and TypeScrip
 - **pnpm** for package management
 - **PokéAPI** as the sole data source — no database, no API keys, no `.env` needed
 
-## Getting started
+## Install guide
 
 The Next.js app lives in the `pokedex/` subdirectory, not the repo root.
 
